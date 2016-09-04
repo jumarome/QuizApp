@@ -67,6 +67,16 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // Haciendo que cambie de pregunta al tocar el texto de la pregunta
+
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex+1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
+
         // Mostrando la primera pregunta al iniciar la actividad
         updateQuestion();
 
