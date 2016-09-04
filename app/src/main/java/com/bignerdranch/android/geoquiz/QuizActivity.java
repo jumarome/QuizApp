@@ -12,6 +12,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mPreviousButton;
     private TextView mQuestionTextView;
 
 
@@ -41,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton  = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
         mNextButton  = (Button) findViewById(R.id.next_button);
+        mPreviousButton = (Button) findViewById(R.id.previous_button);
 
 
         //Event Handlers para botones de respuesta
@@ -67,7 +69,24 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        // Haciendo que cambie de pregunta al tocar el texto de la pregunta
+        mPreviousButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mCurrentIndex !=0){
+                    mCurrentIndex = (mCurrentIndex-1) % mQuestionBank.length;
+                    updateQuestion();
+                }
+
+                else{
+                    Toast.makeText(QuizActivity.this, R.string.prev_warning,Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+
+        // Haciendo que avance de pregunta al tocar el texto de la pregunta
 
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +95,8 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
+
+
 
         // Mostrando la primera pregunta al iniciar la actividad
         updateQuestion();
