@@ -2,9 +2,9 @@ package com.bignerdranch.android.geoquiz;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,8 +12,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private Button mTrueButton;
     private Button mFalseButton;
-    private ImageButton mNextButton;
-    private ImageButton mPreviousButton;
+    private Button mNextButton;
+    private Button mPreviousButton;
     private TextView mQuestionTextView;
 
 
@@ -26,27 +26,62 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
+    private static final String TAG = QuizActivity.class.getCanonicalName();
+    private static final String KEY_INDEX = "index";
+
+
+    //logging Activity lyfeCycle
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG,"onStart() called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG,"onPause() called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"onResume() called");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG,"onStop() called");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG,"onDestroy() called");
+    }
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG,"onCreate(Bundle) called");
         super.onCreate(savedInstanceState);
+
+        //We restore the question index from the Bundle
+        if(savedInstanceState !=null){
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
+        }
         setContentView(R.layout.activity_quiz);
-
-
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
 
-
-
-        // Vinculando las variables de instancia con los widgets del Layout
+        // Linking member variables to XML layout widgets
         mTrueButton  = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
-        mNextButton  = (ImageButton) findViewById(R.id.next_button);
-        mPreviousButton = (ImageButton) findViewById(R.id.previous_button);
+        mNextButton  = (Button) findViewById(R.id.next_button);
+        mPreviousButton = (Button) findViewById(R.id.previous_button);
 
 
-        //Event Handlers para botones de respuesta
+
 
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +122,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
 
-        // Haciendo que avance de pregunta al tocar el texto de la pregunta
+
 
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,11 +134,20 @@ public class QuizActivity extends AppCompatActivity {
 
 
 
-        // Mostrando la primera pregunta al iniciar la actividad
+        // Display the first question when the app starts
         updateQuestion();
 
 
 
+    }
+
+    // We save the question index in the Bundle so that it is available after
+    // a device rotation
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(TAG,"onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX,mCurrentIndex);
     }
 
     private void updateQuestion() {
