@@ -15,7 +15,6 @@ public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
-    private Button mPreviousButton;
     private Button mCheatButton;
     private TextView mQuestionTextView;
 
@@ -87,7 +86,6 @@ public class QuizActivity extends AppCompatActivity {
         mTrueButton  = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
         mNextButton  = (Button) findViewById(R.id.next_button);
-       // mPreviousButton = (Button) findViewById(R.id.previous_button);
         mCheatButton = (Button) findViewById(R.id.cheat_button);
 
 
@@ -115,21 +113,6 @@ public class QuizActivity extends AppCompatActivity {
                 updateQuestion();
             }
         });
-//
-//        mPreviousButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(mCurrentIndex !=0){
-//                    mCurrentIndex = (mCurrentIndex-1) % mQuestionBank.length;
-//                    updateQuestion();
-//                }
-//
-//                else{
-//                    Toast.makeText(QuizActivity.this, R.string.prev_warning,Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
 
 
 
