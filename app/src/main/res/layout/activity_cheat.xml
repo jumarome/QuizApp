@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
+        android:textSize="20dp"
         android:text="@string/warning_text"/>
 
 
@@ -20,7 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        tools:text="Answer"/>
+        android:textSize="20dp"
+        tools:text="Respuesta"/>
     <Button
         android:id="@+id/show_answer_button"
         android:layout_width="wrap_content"
