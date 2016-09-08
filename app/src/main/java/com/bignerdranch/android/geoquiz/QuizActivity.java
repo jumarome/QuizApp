@@ -17,6 +17,13 @@ public class QuizActivity extends AppCompatActivity {
     private Button mNextButton;
     private Button mCheatButton;
     private TextView mQuestionTextView;
+    private boolean mIsCheater;
+    private int mCurrentIndex = 0;
+    private static final String TAG = QuizActivity.class.getCanonicalName();
+    private static final String KEY_INDEX = "index";
+    private static final int REQUEST_CODE_CHEAT=0;
+    private static final String CHEATER="cheater";
+
 
 
 
@@ -30,11 +37,7 @@ public class QuizActivity extends AppCompatActivity {
 
     };
 
-    private int mCurrentIndex = 0;
-    private static final String TAG = QuizActivity.class.getCanonicalName();
-    private static final String KEY_INDEX = "index";
-    private static final int REQUEST_CODE_CHEAT=0;
-    private boolean mIsCheater;
+
 
 
 
@@ -78,6 +81,7 @@ public class QuizActivity extends AppCompatActivity {
         //We restore the question index from the Bundle
         if(savedInstanceState !=null){
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX,0);
+            mIsCheater = savedInstanceState.getBoolean(CHEATER,false);
         }
         setContentView(R.layout.activity_quiz);
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -156,6 +160,8 @@ public class QuizActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(TAG,"onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX,mCurrentIndex);
+        savedInstanceState.putBoolean(CHEATER,mIsCheater);
+
     }
 
     private void updateQuestion() {

@@ -20,6 +20,7 @@ public class CheatActivity extends AppCompatActivity {
     private static final String EXTRA_ANSWER_SHOWN ="com.bignerdranch.android.geoquiz.answer_shown";
     private static final String CHEATER="cheater";
     private static final String ANSWER ="answer";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
